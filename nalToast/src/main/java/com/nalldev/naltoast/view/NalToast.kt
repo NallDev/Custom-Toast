@@ -10,8 +10,8 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.lifecycle.LifecycleCoroutineScope
 import com.nalldev.naltoast.R
-import com.nalldev.naltoast.extensions.fadeIn
-import com.nalldev.naltoast.extensions.fadeOut
+import com.nalldev.naltoast.util.fadeIn
+import com.nalldev.naltoast.util.fadeOut
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
