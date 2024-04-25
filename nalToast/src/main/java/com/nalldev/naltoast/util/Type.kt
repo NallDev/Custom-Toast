@@ -1,5 +1,9 @@
 package com.nalldev.naltoast.util
 
 enum class Type {
-    SUCCESS, ERROR, INFO
+    SUCCESS, FAIL, INFO
+}
+
+enum class Duration {
+    SHORT, LONG
 }
