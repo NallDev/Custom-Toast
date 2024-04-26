@@ -23,6 +23,11 @@ maven {
 }
 ```
 
+Then, you can add configuration to your `build.gradle` in app module:
+```gradle
+implementation("com.github.NallDev:Custom-Toast:1.0.0")
+```
+
 ## Usage
 Follow these steps to use the Simple Custom Toast in your Android application.
 
