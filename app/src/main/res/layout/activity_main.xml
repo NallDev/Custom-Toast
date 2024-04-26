@@ -7,14 +7,46 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tv_hello"
-        android:layout_width="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_success"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Success Toast"
+        app:backgroundTint="#03A65A"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_fail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_fail"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Fail Toast"
+        app:backgroundTint="#F63E50"
+        app:cornerRadius="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_success" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_info"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Info Toast"
+        app:backgroundTint="#739BE5"
+        app:cornerRadius="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_fail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

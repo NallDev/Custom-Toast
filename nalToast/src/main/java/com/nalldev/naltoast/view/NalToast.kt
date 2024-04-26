@@ -1,8 +1,6 @@
 package com.nalldev.naltoast.view
 
 import android.graphics.Color
-import android.os.Handler
-import android.os.Looper
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -19,10 +17,13 @@ import com.nalldev.naltoast.util.fadeIn
 import com.nalldev.naltoast.util.fadeOut
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 class NalToast(private val rootView: View, private val type: Type = Type.SUCCESS) {
     private lateinit var toastView: View
     private var popupWindow: PopupWindow? = null
+    private val executor = Executors.newSingleThreadScheduledExecutor()
 
     private fun initializeView(type: Type) {
         val inflater = LayoutInflater.from(rootView.context)
@@ -47,16 +48,12 @@ class NalToast(private val rootView: View, private val type: Type = Type.SUCCESS
         val displayTime = if (duration == Duration.SHORT) 2250L else 5000L
 
         if (lifecycleScope == null) {
-            val handler = Handler(Looper.getMainLooper())
-            handler.post {
-                toastView.fadeIn(500, completion = {
-                    handler.postDelayed({
-                        toastView.fadeOut(500) {
-                            popupWindow?.dismiss()
-                        }
-                    }, displayTime)
-                })
-            }
+            toastView.fadeIn(500)
+            executor.schedule({
+                toastView.fadeOut(500) {
+                    popupWindow?.dismiss()
+                }
+            }, displayTime + 500, TimeUnit.MILLISECONDS)
         } else {
             lifecycleScope.launch {
                 toastView.fadeIn(500)

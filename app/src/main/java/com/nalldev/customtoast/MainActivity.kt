@@ -3,6 +3,7 @@ package com.nalldev.customtoast
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -16,16 +17,15 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    lateinit var successToast : NalToast
-    lateinit var errorToast : NalToast
-    lateinit var infoToast : NalToast
-
-    var index = 1
+    private lateinit var successToast : NalToast
+    private lateinit var errorToast : NalToast
+    private lateinit var infoToast : NalToast
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -38,20 +38,17 @@ class MainActivity : AppCompatActivity() {
 
         infoToast = NalToast(binding.root, Type.INFO)
 
-        binding.tvHello.setOnClickListener {
+        binding.apply {
+            btnSuccess.setOnClickListener {
+                successToast.show("You are great!", Duration.SHORT, lifecycleScope)
+            }
 
-            if (index == 1) {
-                successToast.show("SHORT!!", Duration.SHORT, lifecycleScope)
-                index++
-            } else if (index == 2) {
-                errorToast.show("LONG!!", Duration.LONG, lifecycleScope)
-                index++
-            } else if (index == 3) {
-                infoToast.show("SHORT!!", Duration.SHORT, lifecycleScope)
-                index++
-            } else {
-                successToast.show("LONG!!", Duration.SHORT, lifecycleScope)
-                index = 1
+            btnFail.setOnClickListener {
+                errorToast.show("Sorry, wrong way", Duration.SHORT)
+            }
+
+            btnInfo.setOnClickListener {
+                infoToast.show("Good morning", Duration.LONG)
             }
         }
     }
